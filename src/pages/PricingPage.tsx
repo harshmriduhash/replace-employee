@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   CheckIcon,
   SparklesIcon,
@@ -13,7 +13,7 @@ import {
   FireIcon,
   HeartIcon,
   GlobeAltIcon,
-} from '@heroicons/react/24/outline';
+} from "@heroicons/react/24/outline";
 
 interface PricingTier {
   name: string;
@@ -36,12 +36,12 @@ const pricingTiers: PricingTier[] = [
       "Basic automation workflows",
       "24/7 AI operation",
       "Email support",
-      "90% cost reduction guarantee"
+      "90% cost reduction guarantee",
     ],
     savings: 450000,
     roi: 4500,
     icon: RocketLaunchIcon,
-    popularFeatures: ["Cost savings", "Basic automation"]
+    popularFeatures: ["Cost savings", "Basic automation"],
   },
   {
     name: "Department Domination",
@@ -53,12 +53,12 @@ const pricingTiers: PricingTier[] = [
       "Priority processing",
       "24/7 premium support",
       "95% cost reduction guarantee",
-      "Custom AI training"
+      "Custom AI training",
     ],
     savings: 2375000,
     roi: 9875,
     icon: SparklesIcon,
-    popularFeatures: ["Advanced automation", "Priority support"]
+    popularFeatures: ["Advanced automation", "Priority support"],
   },
   {
     name: "Total Transformation",
@@ -71,13 +71,13 @@ const pricingTiers: PricingTier[] = [
       "99% cost reduction guarantee",
       "Custom integration support",
       "Advanced analytics dashboard",
-      "AI strategy consulting"
+      "AI strategy consulting",
     ],
     savings: 9500000,
     roi: 15833,
     icon: BoltIcon,
-    popularFeatures: ["Unlimited scale", "Enterprise features"]
-  }
+    popularFeatures: ["Unlimited scale", "Enterprise features"],
+  },
 ];
 
 const savingsCalculator = {
@@ -86,23 +86,23 @@ const savingsCalculator = {
     { title: "Mid Level", baseCost: 75000 },
     { title: "Senior Level", baseCost: 120000 },
     { title: "Management", baseCost: 150000 },
-    { title: "Executive", baseCost: 250000 }
+    { title: "Executive", baseCost: 250000 },
   ],
   benefits: [
     { name: "Healthcare", percentage: 20 },
     { name: "Equipment", percentage: 5 },
     { name: "Training", percentage: 10 },
     { name: "Office Space", percentage: 15 },
-    { name: "Other Benefits", percentage: 10 }
-  ]
+    { name: "Other Benefits", percentage: 10 },
+  ],
 };
 
 const PricingPage: React.FC = () => {
   const [selectedTier, setSelectedTier] = useState<number>(1);
   const [calculatorState, setCalculatorState] = useState({
-    roleType: 'Mid Level',
+    roleType: "Mid Level",
     employeeCount: 10,
-    benefitsIncluded: true
+    benefitsIncluded: true,
   });
   const [showROIPopup, setShowROIPopup] = useState(false);
   const [animateNumbers, setAnimateNumbers] = useState(false);
@@ -113,14 +113,19 @@ const PricingPage: React.FC = () => {
   }, []);
 
   const calculateTotalSavings = () => {
-    const role = savingsCalculator.roles.find(r => r.title === calculatorState.roleType);
+    const role = savingsCalculator.roles.find(
+      (r) => r.title === calculatorState.roleType
+    );
     if (!role) return 0;
 
     let totalCost = role.baseCost * calculatorState.employeeCount;
-    
+
     if (calculatorState.benefitsIncluded) {
-      const benefitsPercentage = savingsCalculator.benefits.reduce((acc, benefit) => acc + benefit.percentage, 0);
-      totalCost *= (1 + benefitsPercentage / 100);
+      const benefitsPercentage = savingsCalculator.benefits.reduce(
+        (acc, benefit) => acc + benefit.percentage,
+        0
+      );
+      totalCost *= 1 + benefitsPercentage / 100;
     }
 
     return totalCost * 0.9; // 90% savings
@@ -131,14 +136,14 @@ const PricingPage: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    visible: { opacity: 1, y: 0 },
   };
 
   const PricingMetrics = () => {
@@ -167,21 +172,25 @@ const PricingPage: React.FC = () => {
   };
 
   const ROICalculator = () => {
-    const animateNumbers = async (start: number, end: number, element: HTMLElement) => {
+    const animateNumbers = async (
+      start: number,
+      end: number,
+      element: HTMLElement
+    ) => {
       const duration = 1000;
       const frames = 60;
       const increment = (end - start) / frames;
-      
-      for(let i = 0; i <= frames; i++) {
-        const current = Math.round(start + (increment * i));
+
+      for (let i = 0; i <= frames; i++) {
+        const current = Math.round(start + increment * i);
         element.textContent = current.toLocaleString();
-        await new Promise(resolve => setTimeout(resolve, duration / frames));
+        await new Promise((resolve) => setTimeout(resolve, duration / frames));
       }
     };
 
     return (
       <div className="mt-8">
-        <button 
+        <button
           onClick={() => setShowROIPopup(true)}
           className="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700"
         >
@@ -220,7 +229,9 @@ const PricingPage: React.FC = () => {
               key={tier.name}
               variants={itemVariants}
               className={`relative rounded-2xl bg-white p-8 shadow-xl ring-1 ring-gray-200 transition-all duration-300 ${
-                selectedTier === index ? 'ring-2 ring-primary-500 scale-105' : ''
+                selectedTier === index
+                  ? "ring-2 ring-primary-500 scale-105"
+                  : ""
               }`}
               onClick={() => setSelectedTier(index)}
             >
@@ -236,13 +247,15 @@ const PricingPage: React.FC = () => {
                   <span className="text-4xl font-bold tracking-tight text-gray-900">
                     {tier.price}%
                   </span>
-                  <span className="text-sm text-gray-600 ml-1">of human cost</span>
+                  <span className="text-sm text-gray-600 ml-1">
+                    of human cost
+                  </span>
                 </div>
 
                 <motion.div
                   className="mt-6"
                   initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
+                  animate={{ height: "auto", opacity: 1 }}
                   transition={{ duration: 0.5 }}
                 >
                   <ul className="space-y-3">
@@ -258,7 +271,9 @@ const PricingPage: React.FC = () => {
                 {/* ROI Metrics */}
                 <div className="mt-8 space-y-4">
                   <div className="bg-primary-50 rounded-lg p-4">
-                    <div className="text-sm font-medium text-primary-900">Annual Savings</div>
+                    <div className="text-sm font-medium text-primary-900">
+                      Annual Savings
+                    </div>
                     <motion.div
                       className="text-2xl font-bold text-primary-600"
                       initial={{ opacity: 0, scale: 0.5 }}
@@ -269,7 +284,9 @@ const PricingPage: React.FC = () => {
                     </motion.div>
                   </div>
                   <div className="bg-green-50 rounded-lg p-4">
-                    <div className="text-sm font-medium text-green-900">ROI</div>
+                    <div className="text-sm font-medium text-green-900">
+                      ROI
+                    </div>
                     <motion.div
                       className="text-2xl font-bold text-green-600"
                       initial={{ opacity: 0, scale: 0.5 }}
@@ -313,26 +330,42 @@ const PricingPage: React.FC = () => {
             {/* Calculator Controls */}
             <div className="space-y-6">
               <div>
-                <label className="text-sm font-medium text-gray-700">Role Type</label>
+                <label className="text-sm font-medium text-gray-700">
+                  Role Type
+                </label>
                 <select
                   value={calculatorState.roleType}
-                  onChange={(e) => setCalculatorState(prev => ({ ...prev, roleType: e.target.value }))}
+                  onChange={(e) =>
+                    setCalculatorState((prev) => ({
+                      ...prev,
+                      roleType: e.target.value,
+                    }))
+                  }
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
                 >
-                  {savingsCalculator.roles.map(role => (
-                    <option key={role.title} value={role.title}>{role.title}</option>
+                  {savingsCalculator.roles.map((role) => (
+                    <option key={role.title} value={role.title}>
+                      {role.title}
+                    </option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="text-sm font-medium text-gray-700">Number of Employees</label>
+                <label className="text-sm font-medium text-gray-700">
+                  Number of Employees
+                </label>
                 <input
                   type="range"
                   min="1"
                   max="100"
                   value={calculatorState.employeeCount}
-                  onChange={(e) => setCalculatorState(prev => ({ ...prev, employeeCount: parseInt(e.target.value) }))}
+                  onChange={(e) =>
+                    setCalculatorState((prev) => ({
+                      ...prev,
+                      employeeCount: parseInt(e.target.value),
+                    }))
+                  }
                   className="mt-1 w-full"
                 />
                 <div className="text-sm text-gray-600 mt-1">
@@ -344,7 +377,12 @@ const PricingPage: React.FC = () => {
                 <input
                   type="checkbox"
                   checked={calculatorState.benefitsIncluded}
-                  onChange={(e) => setCalculatorState(prev => ({ ...prev, benefitsIncluded: e.target.checked }))}
+                  onChange={(e) =>
+                    setCalculatorState((prev) => ({
+                      ...prev,
+                      benefitsIncluded: e.target.checked,
+                    }))
+                  }
                   className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                 />
                 <label className="ml-2 text-sm text-gray-700">
@@ -356,8 +394,10 @@ const PricingPage: React.FC = () => {
             {/* Results Display */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-xl p-6 shadow-lg">
-                <h4 className="text-lg font-semibold text-gray-900">Your Potential Savings</h4>
-                
+                <h4 className="text-lg font-semibold text-gray-900">
+                  Your Potential Savings
+                </h4>
+
                 <div className="mt-6 grid gap-4">
                   <motion.div
                     className="bg-green-50 rounded-lg p-4"
@@ -365,7 +405,9 @@ const PricingPage: React.FC = () => {
                     animate={{ scale: 1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="text-sm font-medium text-green-800">Annual Savings</div>
+                    <div className="text-sm font-medium text-green-800">
+                      Annual Savings
+                    </div>
                     <div className="text-3xl font-bold text-green-600">
                       ${calculateTotalSavings().toLocaleString()}
                     </div>
@@ -378,7 +420,9 @@ const PricingPage: React.FC = () => {
                       animate={{ scale: 1 }}
                       transition={{ duration: 0.3, delay: 0.1 }}
                     >
-                      <div className="text-sm font-medium text-blue-800">Monthly Savings</div>
+                      <div className="text-sm font-medium text-blue-800">
+                        Monthly Savings
+                      </div>
                       <div className="text-2xl font-bold text-blue-600">
                         ${(calculateTotalSavings() / 12).toLocaleString()}
                       </div>
@@ -390,7 +434,9 @@ const PricingPage: React.FC = () => {
                       animate={{ scale: 1 }}
                       transition={{ duration: 0.3, delay: 0.2 }}
                     >
-                      <div className="text-sm font-medium text-purple-800">5-Year Savings</div>
+                      <div className="text-sm font-medium text-purple-800">
+                        5-Year Savings
+                      </div>
                       <div className="text-2xl font-bold text-purple-600">
                         ${(calculateTotalSavings() * 5).toLocaleString()}
                       </div>
@@ -412,7 +458,9 @@ const PricingPage: React.FC = () => {
               className="fixed inset-0 flex items-center justify-center z-50"
             >
               <div className="bg-white rounded-xl p-8 shadow-2xl max-w-lg w-full mx-4">
-                <h4 className="text-xl font-bold text-gray-900">Detailed ROI Analysis</h4>
+                <h4 className="text-xl font-bold text-gray-900">
+                  Detailed ROI Analysis
+                </h4>
                 {/* Add detailed ROI content here */}
               </div>
             </motion.div>
@@ -426,4 +474,4 @@ const PricingPage: React.FC = () => {
   );
 };
 
-export default PricingPage; 
+export default PricingPage;
