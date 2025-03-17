@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/outline";
 
 interface FormData {
   firstName: string;
@@ -15,24 +15,28 @@ interface FormData {
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    firstName: '',
-    lastName: '',
-    company: '',
-    email: '',
-    phone: '',
-    employeeRole: '',
-    currentCost: '',
-    message: '',
+    firstName: "",
+    lastName: "",
+    company: "",
+    email: "",
+    phone: "",
+    employeeRole: "",
+    currentCost: "",
+    message: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
     // Add your form submission logic here
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -53,7 +57,9 @@ const ContactPage: React.FC = () => {
             Start Saving Today
           </h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Tell us about the role you want to replace with AI. Remember, you only pay 10% of your current costs if you're satisfied with the results.
+            Tell us about the role you want to replace with AI. Remember, you
+            only pay 10% of your current costs if you're satisfied with the
+            results.
           </p>
         </motion.div>
 
@@ -65,7 +71,10 @@ const ContactPage: React.FC = () => {
         >
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div>
-              <label htmlFor="firstName" className="block text-sm font-semibold leading-6 text-gray-900">
+              <label
+                htmlFor="firstName"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
                 First name
               </label>
               <div className="mt-2.5">
@@ -80,7 +89,10 @@ const ContactPage: React.FC = () => {
               </div>
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-sm font-semibold leading-6 text-gray-900">
+              <label
+                htmlFor="lastName"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
                 Last name
               </label>
               <div className="mt-2.5">
@@ -95,7 +107,10 @@ const ContactPage: React.FC = () => {
               </div>
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor="company" className="block text-sm font-semibold leading-6 text-gray-900">
+              <label
+                htmlFor="company"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
                 Company
               </label>
               <div className="mt-2.5">
@@ -110,7 +125,10 @@ const ContactPage: React.FC = () => {
               </div>
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor="email" className="block text-sm font-semibold leading-6 text-gray-900">
+              <label
+                htmlFor="email"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
                 Email
               </label>
               <div className="mt-2.5">
@@ -125,7 +143,10 @@ const ContactPage: React.FC = () => {
               </div>
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor="phone" className="block text-sm font-semibold leading-6 text-gray-900">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
                 Phone number
               </label>
               <div className="mt-2.5">
@@ -140,7 +161,10 @@ const ContactPage: React.FC = () => {
               </div>
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor="employeeRole" className="block text-sm font-semibold leading-6 text-gray-900">
+              <label
+                htmlFor="employeeRole"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
                 Role to Replace
               </label>
               <div className="mt-2.5">
@@ -156,7 +180,10 @@ const ContactPage: React.FC = () => {
               </div>
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor="currentCost" className="block text-sm font-semibold leading-6 text-gray-900">
+              <label
+                htmlFor="currentCost"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
                 Current Annual Cost
               </label>
               <div className="mt-2.5">
@@ -172,7 +199,10 @@ const ContactPage: React.FC = () => {
               </div>
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor="message" className="block text-sm font-semibold leading-6 text-gray-900">
+              <label
+                htmlFor="message"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
                 Additional Details
               </label>
               <div className="mt-2.5">
@@ -208,11 +238,17 @@ const ContactPage: React.FC = () => {
             Or contact us directly
           </h3>
           <div className="mt-6 flex justify-center gap-x-6">
-            <a href="mailto:contact@replaceyouremployee.com" className="text-sm font-semibold leading-6 text-gray-900">
+            <a
+              href="mailto:contact@replaceyouremployee.com"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
               <EnvelopeIcon className="h-5 w-5 inline-block mr-2" />
               contact@replaceyouremployee.com
             </a>
-            <a href="tel:+1234567890" className="text-sm font-semibold leading-6 text-gray-900">
+            <a
+              href="tel:+1234567890"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
               <PhoneIcon className="h-5 w-5 inline-block mr-2" />
               (123) 456-7890
             </a>
@@ -223,4 +259,4 @@ const ContactPage: React.FC = () => {
   );
 };
 
-export default ContactPage; 
+export default ContactPage;
